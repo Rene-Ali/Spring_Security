@@ -13,15 +13,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final UserDetailsService detailsService;
+    private final JwtRequestFilter jwtRequestFilter;
 
-    public SecurityConfig(UserDetailsService detailsService) {
+    public SecurityConfig(UserDetailsService detailsService, JwtRequestFilter jwtRequestFilter) {
         this.detailsService = detailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
     @Bean
@@ -29,9 +32,11 @@ public class SecurityConfig {
         return http.csrf( csrf -> csrf.disable() )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/auth").permitAll()
+                        .requestMatchers("/hello").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
