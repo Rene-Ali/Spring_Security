@@ -1,0 +1,25 @@
+POST http://localhost:8080/auth
+Content-Type: application/json
+
+{
+  "username": "JDoe",
+  "password": "test"
+}
+
+###
+POST http://localhost:8080/auth
+Content-Type: application/json
+
+{
+  "username": "MM",
+  "password": "test1"
+}
+
+###
+POST http://localhost:8080/auth
+Content-Type: application/json
+
+{
+  "username": "Gustav",
+  "password": "test1"
+}
