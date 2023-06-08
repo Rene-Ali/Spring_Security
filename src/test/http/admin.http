@@ -1,2 +1,2 @@
 GET http://localhost:8080/secured
-Authorization: Bearer aasfsdfsdfsdfsd
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNTSIsImV4cCI6MTY4NjI3NjY4NywiaWF0IjoxNjg2MjQwNjg3fQ.U9nkw-qyjYWFGX3kFSwxKd9lbttK-HBwEtrGIC3qHyI
